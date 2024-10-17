@@ -37,6 +37,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'squizlabs/php_codesniffer' => array(
+            'pretty_version' => '3.10.3',
+            'version' => '3.10.3.0',
+            'reference' => '62d32998e820bddc40f99f8251958aed187a5c9c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'steampixel/simple-php-router' => array(
             'pretty_version' => '0.7.1',
             'version' => '0.7.1.0',

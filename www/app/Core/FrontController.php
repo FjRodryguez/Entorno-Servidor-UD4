@@ -29,6 +29,34 @@ class FrontController{
             }
             , 'post');
 
+        Route::add('/anagrama',
+            function(){
+                $controlador = new EjerciciosController();
+                $controlador->showFormularioAnagrama();
+            }
+            , 'get');
+
+        Route::add('/anagrama',
+            function(){
+                $controlador = new EjerciciosController();
+                $controlador->doFormularioAnagrama();
+            }
+            , 'post');
+
+        Route::add('/mismas-letras',
+            function(){
+                $controlador = new EjerciciosController();
+                $controlador->showFormularioMismasLetras();
+            }
+            , 'get');
+
+        Route::add('/mismas-letras',
+            function(){
+                $controlador = new EjerciciosController();
+                $controlador->doFormularioMismasLetras();
+            }
+            , 'post');
+
         Route::add('/demo-proveedores', 
                 function(){
                     $controlador = new \Com\Daw2\Controllers\InicioController();
