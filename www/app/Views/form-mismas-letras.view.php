@@ -1,22 +1,13 @@
 <!--Inicio HTML -->
 <div class="row">
     <?php
-    if (isset($mismasLetras)) {
-        if($mismasLetras){?>
+    if (isset($mismasLetras)) {?>
             <div class="col-12">
-                <div class="alert alert-success">
-                    Tienen las mismas letras
+                <div class="alert <?php echo ($mismasLetras) ? "alert-success" : "alert-danger"; ?>">
+                    <?php echo ($mismasLetras) ? "Tienen las mismas letras" : "No tienen las mismas letras"; ?>
                 </div>
             </div>
-            <?php
-        }else{?>
-            <div class="col-12">
-                <div class="alert alert-danger">
-                    No tienen las mismas letras
-                </div>
-            </div>
-        <?php }
-    }?>
+            <?php }?>
     <div class="col-12">
         <div class="card shadow mb-4">
             <form method="post" action="">

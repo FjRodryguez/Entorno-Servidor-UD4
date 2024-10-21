@@ -59,36 +59,28 @@ class EjerciciosController extends BaseController
     public function doFormularioAnagrama(): void
     {
         $data = array(
-            'titulo' => 'Formulario Anagrama',
-            'breadcrumb' => ['Ejercicios', 'Formulario Anagrama'],
+            'titulo' => 'Ejercicio anagrama',
+            'breadcrumb' => ['Ejercicios', 'Anagrama'],
             'seccion' => '/anagrama'
         );
-        $data['errors'] = $this->checkErrorFormAnagrama($_POST);
         $data['input'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-        //$data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+        $data['errors'] = $this->checkAnagramaErrors($_POST);
         if (empty($data['errors'])) {
-            $palabra1 = $data['input']['palabra1'];
-            $palabra2 = $data['input']['palabra2'];
-            $anagrama = true;
-            if (mb_strlen($palabra1) === mb_strlen($palabra2)) {
-                $i = 0;
-                while ($anagrama == true && $i < mb_strlen($palabra1)) {
-                    $caracter = substr($palabra1, $i, 1);
-                    if (str_contains($palabra2, $caracter)) {
-                        $palabra2 = str_replace($caracter, "", $palabra2);
-                    }else{
-                        $anagrama = false;
-                    }
-                    $i++;
-                }
-                $data['anagrama'] = $anagrama;
-            } else {
-                $anagrama = false;
-                $data['anagrama'] = $anagrama;
-            }
+            $data['resultado'] = $this->comprobarAnagrama($_POST['texto1'], $_POST['texto2']);
         }
+        $this->view->showViews(
+            array('templates/header.view.php', 'anagrama.view.php', 'templates/footer.view.php'),
+            $data
+        );
+    }
 
-        $this->view->showViews(array('templates/header.view.php', 'form-anagrama.view.php', 'templates/footer.view.php'), $data);
+    private function comprobarAnagrama(string $texto1, string $texto2): bool
+    {
+        $a1 = mb_str_split($texto1);
+        $a2 = mb_str_split($texto2);
+        sort($a1);
+        sort($a2);
+        return $a1 === $a2;
     }
 
     public function doFormularioMismasLetras(): void
@@ -126,6 +118,11 @@ class EjerciciosController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'form-mismas-letras.view.php', 'templates/footer.view.php'), $data);
     }
 
+    private function doMismasLetras (string $palabra1, string $palabra2): bool
+    {
+
+    }
+
     private function checkErrorFormNombre(array $data): array
     {
         $errors = array();
@@ -136,6 +133,18 @@ class EjerciciosController extends BaseController
     }
 
     private function checkErrorFormAnagrama(array $data): array
+    {
+        $errors = array();
+        if (!preg_match('/[\p{L}]/iu', $data['palabra1'])) {
+            $errors['palabra1'] = 'La palabra tiene que contener al menos una letra';
+        }
+        if (!preg_match('/[\p{L}]/iu', $data['palabra2'])) {
+            $errors['palabra2'] = 'La palabra tiene que contener al menos una letra';
+        }
+        return $errors;
+    }
+
+    private function checkErrorFormMismasLetras(array $data): array
     {
         $errors = array();
         if (!preg_match('/[\p{L}]/iu', $data['palabra1'])) {

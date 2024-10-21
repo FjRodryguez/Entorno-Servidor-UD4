@@ -1,22 +1,13 @@
 <!--Inicio HTML -->
 <div class="row">
     <?php
-    if (isset($anagrama)) {
-        if($anagrama){?>
+    if (isset($anagrama)) { ?>
             <div class="col-12">
-                <div class="alert alert-success">
-                    Son anagramas
+                <div class="alert <?php echo ($anagrama) ? "alert-success" : "alert-danger"; ?> ">
+                    <?php echo ($anagrama) ? "Son anagramas" : "No son anagramas";?>
                 </div>
             </div>
-        <?php
-        }else{?>
-            <div class="col-12">
-                <div class="alert alert-danger">
-                    No son anagramas
-                </div>
-            </div>
-        <?php }
-    }?>
+        <?php } ?>
     <div class="col-12">
         <div class="card shadow mb-4">
             <form method="post" action="">
