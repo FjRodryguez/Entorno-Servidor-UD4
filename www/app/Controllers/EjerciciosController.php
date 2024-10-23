@@ -118,11 +118,6 @@ class EjerciciosController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'form-mismas-letras.view.php', 'templates/footer.view.php'), $data);
     }
 
-    private function doMismasLetras (string $palabra1, string $palabra2): bool
-    {
-
-    }
-
     private function checkErrorFormNombre(array $data): array
     {
         $errors = array();
