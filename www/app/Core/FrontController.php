@@ -57,6 +57,24 @@ class FrontController{
             }
             , 'post');
 
+        Route::add(
+            '/usuarios/new',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\UsuariosController();
+                $controlador->showUsuarios();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/usuarios/new',
+            function () {
+                $controlador = new \Com\Daw2\Controllers\UsuariosController();
+                $controlador->doUsuarios();
+            },
+            'post'
+        );
+
         Route::add('/demo-proveedores', 
                 function(){
                     $controlador = new \Com\Daw2\Controllers\InicioController();
